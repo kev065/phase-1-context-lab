@@ -27,6 +27,35 @@ function createTimeInEvent (date){
 }
 
 
+function createTimeOutEvent (date) {
+    const timeOut = {
+        type: 'TimeOut',
+        hour: parseInt(date.slice(11)),
+        date: date.slice(0, 10)
+    }
+    this.timeOutEvents.push(timeOut)
+    return this
+}
+function hoursWorkedOnDate(date){
+    const timeIn = this.timeInEvents.filter(dayIn => dayIn.date === date)
+    const timeOut = this.timeOutEvents.filter(dayOut => dayOut.date === date)
+    const totalHours = (timeOut[0].hour - timeIn[0].hour ) / 100
+    return totalHours
+}
+
+
+function findEmployeeByFirstName(srcArray, firstName){
+    const match = srcArray.filter(employee => employee.firstName === firstName)
+    return match.length ? match[0] : 'undefined'
+}
+
+function calculatePayroll (array) {
+    let totalWages = []
+    for(let employee of array){
+        totalWages.push(allWagesFor.bind(employee)())
+    }
+    return totalWages.reduce((a, b)=> a + b)
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
